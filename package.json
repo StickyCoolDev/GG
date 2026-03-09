@@ -9,10 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.166.3",
+    "@tanstack/router-devtools": "^1.166.3",
+    "convex": "^1.32.0",
     "preact": "^10.27.2"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.2",
+    "@tanstack/router-vite-plugin": "^1.166.3",
     "@types/node": "^24.10.1",
     "typescript": "~5.9.3",
     "vite": "^7.3.1"
