@@ -1,0 +1,107 @@
+:root {
+  --bg-color: #F8F7F3;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  
+  --neo-yellow: #FFD100;
+  --neo-pink: #FF90E8;
+  --neo-cyan: #00F0FF;
+  --neo-orange: #FF5C00;
+  --neo-purple: #9747FF;
+  --neo-green: #38DBFF; /* Actually a bright blue/cyan, let's call it neo-blue */
+  --neo-lime: #A2FF00;
+
+  --border-black: #000000;
+  --border-width: 4px;
+  --radius: 20px;
+  --shadow-hard: 8px 8px 0px 0px #000000;
+  --shadow-hover: 4px 4px 0px 0px #000000;
+  
+  --font-main: 'Syne', sans-serif;
+  --font-heading: 'Archivo Black', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-weight: 700;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  padding: 20px;
+}
+
+/* Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-left: var(--border-width) solid var(--border-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neo-yellow);
+  border: var(--border-width) solid var(--border-black);
+  border-radius: var(--radius);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neo-pink);
+}
+
+.neo-card {
+  background: white;
+  border: var(--border-width) solid var(--border-black);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-hard);
+  transition: all 0.2s ease-in-out;
+}
+
+.neo-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0px 0px #000;
+}
+
+.neo-button {
+  background: var(--neo-cyan);
+  border: var(--border-width) solid var(--border-black);
+  border-radius: var(--radius);
+  box-shadow: 5px 5px 0px 0px #000;
+  padding: 10px 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.neo-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #000;
+}
