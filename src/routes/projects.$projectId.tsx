@@ -12,7 +12,7 @@ export const Route = createFileRoute('/projects/$projectId')({
 
 function ProjectDetail() {
   const { projectId } = Route.useParams()
-  const project = useQuery(api.projects.getProjectById, { id: projectId })
+  const project = useQuery(api.projects.getProjectById, { id: projectId as any })
 
   if (project === undefined) {
     return (
