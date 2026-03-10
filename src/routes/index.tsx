@@ -17,8 +17,7 @@ function Index() {
           <h1>ASCENT<span>SYS</span></h1>
         </div>
         <nav className="nav-links">
-          <a href="#projects">Work</a>
-          <a href="#about">About</a>
+          <Link to="/store">Store</Link>
           <button className="minimal-button">Join Terminal</button>
         </nav>
       </header>
@@ -81,7 +80,7 @@ function Index() {
               </div>
               <div className="stat-item">
                 <span className="stat-label">Status</span>
-                <span className="stat-value" style={{ color: '#00ff41' }}>Operational</span>
+                <span className="stat-value" style={{ color: '#008f11' }}>Operational</span>
               </div>
             </div>
           </div>
