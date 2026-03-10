@@ -1,9 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-//import { Id } from "../../convex/_generated/dataModel"
-
-import { StarShape, BlobShape } from '../components/Shapes'
 import '../app.css'
 
 export const Route = createFileRoute('/projects/$projectId')({
@@ -16,19 +13,18 @@ function ProjectDetail() {
 
   if (project === undefined) {
     return (
-      <div className="app-container" style={{ textAlign: 'center', padding: '5rem' }}>
-        <h1 className="hero-title">SCANNING</h1>
-        <p>Retrieving project data from the core...</p>
+      <div className="app-container" style={{ textAlign: 'center', padding: '10rem 0' }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', opacity: 0.5 }}>SCANNING_CORE...</p>
       </div>
     )
   }
 
   if (project === null) {
     return (
-      <div className="app-container" style={{ textAlign: 'center', padding: '5rem' }}>
+      <div className="app-container" style={{ textAlign: 'center', padding: '10rem 0' }}>
         <h1 className="hero-title">404</h1>
-        <p>Project not found in the archives.</p>
-        <Link to="/" className="neo-button" style={{ marginTop: '2rem', display: 'inline-block' }}>Back to Base</Link>
+        <p className="hero-subtitle" style={{ margin: '2rem auto' }}>Project not found in the archives.</p>
+        <Link to="/" className="minimal-button">Back to Base</Link>
       </div>
     )
   }
@@ -38,31 +34,58 @@ function ProjectDetail() {
       <header className="header">
         <div className="logo-area">
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <h1>Ascent<span>SYS</span></h1>
+            <h1>ASCENT<span>SYS</span></h1>
           </Link>
         </div>
-        <Link to="/" className="neo-button">Back to Base</Link>
+        <Link to="/" className="minimal-button">Back to Base</Link>
       </header>
 
-      <main style={{ padding: '4rem' }}>
-        <div className="neo-card" style={{ maxWidth: '800px', margin: '4rem auto',padding: "4rem", position: 'relative' }}>
-          <span className="project-tag" style={{ background: 'var(--neo-yellow)' }}>{project.tag}</span>
-          <h2 className="section-title" style={{ marginTop: '1rem', fontSize: '3rem' }}>{project.title}</h2>
-          <p className="project-desc" style={{ fontSize: '1.2rem', fontWeight: 700, margin: '2rem 0' }}>{project.desc}</p>
-          <div className="manifesto-text" style={{ textAlign: 'left', borderTop: '4px solid #000', paddingTop: '2rem' }}>
-            {project.content}
+      <main>
+        <div className="hero">
+          <div className="hero-content">
+            <span className="project-tag">{project.tag}</span>
+            <h1 className="hero-title" style={{ fontSize: 'clamp(3rem, 8vw, 6rem)' }}>{project.title}</h1>
+            <p className="hero-subtitle">{project.desc}</p>
           </div>
-
-          <div className="floating-shapes" style={{ pointerEvents: 'none' }}>
-            <StarShape color="var(--neo-pink)" size={100} style={{ top: '-30px', right: '-30px', transform: 'rotate(15deg)' }} />
-            <BlobShape color="var(--neo-lime)" size={150} style={{ bottom: '-50px', left: '-50px', transform: 'rotate(-10deg)', opacity: 0.5 }} />
-          </div>
+          <div className="hero-visual"></div>
         </div>
+
+        <section className="section-container">
+          <div style={{ maxWidth: '800px' }}>
+            <h2 className="section-title">Analysis</h2>
+            <div className="manifesto-text" style={{ fontSize: '1.5rem', fontWeight: 400, color: 'var(--text-primary)' }}>
+              {project.content}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-container" style={{ borderTop: '1px solid var(--border-color)', paddingTop: '6rem' }}>
+          <div className="manifesto-stats">
+            <div className="stat-item">
+              <span className="stat-label">Project ID</span>
+              <span className="stat-value">{projectId.slice(0, 8)}...</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Classification</span>
+              <span className="stat-value">{project.tag}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">System Date</span>
+              <span className="stat-value">2026.03.10</span>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="footer">
-        <div className="footer-text">
+        <div className="footer-logo">
           <p>© 2026 ASCENT_SYSTEMS</p>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>EST. 2026 / BERLIN</p>
+        </div>
+        <div className="footer-links">
+          <Link to="/">Back to index</Link>
+          <a href="#">Github</a>
+          <a href="#">Contact</a>
         </div>
       </footer>
     </div>
