@@ -81,7 +81,7 @@ function Index() {
               </div>
               <div className="stat-item">
                 <span className="stat-label">Status</span>
-                <span className="stat-value">Operational</span>
+                <span className="stat-value" style={{ color: '#00ff41' }}>Operational</span>
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@ function Index() {
       <footer className="footer">
         <div className="footer-logo">
           <p>© 2026 ASCENT_SYSTEMS</p>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>EST. 2026 / BERLIN</p>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>EST. 2026 / BANGLADESH</p>
         </div>
         <div className="footer-links">
           <a href="#">X (Twitter)</a>

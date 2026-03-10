@@ -10,10 +10,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 0;
+  padding: 2rem 0;
   border-bottom: 1px solid var(--border-color);
   margin-bottom: 6rem;
-  background: transparent;
+  background-color: var(--bg-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo-area h1 {
