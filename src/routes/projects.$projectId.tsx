@@ -6,19 +6,22 @@ export const Route = createFileRoute('/projects/$projectId')({
   component: ProjectDetail,
 })
 
-// --- CUSTOM MARKDOWN PARSER ---
-function MarkdownRenderer({ content }) {
+import { ReactNode } from 'react' // Import ReactNode for typing children
+
+// --- CUSTOM MARKDOWN PARSER WITH TYPES ---
+interface MarkdownRendererProps {
+  content: string | undefined;
+}
+
+function MarkdownRenderer({ content }: MarkdownRendererProps) {
   if (!content) return null;
 
-  // Split content by double newlines to separate into blocks
-  const blocks = content.trim().split(/\n\n+/);
+  const blocks: string[] = content.trim().split(/\n\n+/);
 
-  // Helper to parse inline styles (Bold, Italic, Code, Links) safely into React nodes
-  const parseInline = (text) => {
-    // Regex splits by: **bold**, *italic*, `code`, or [text](link)
+  const parseInline = (text: string): ReactNode[] => {
     const tokens = text.split(/(\*\*.*?\*\*|\*.*?\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
     
-    return tokens.map((token, i) => {
+    return tokens.map((token: string, i: number) => {
       if (token.startsWith('**') && token.endsWith('**')) {
         return <strong key={i} style={{ fontWeight: 600 }}>{token.slice(2, -2)}</strong>;
       }
@@ -50,14 +53,13 @@ function MarkdownRenderer({ content }) {
           </a>
         );
       }
-      // Return standard text for everything else
       return <span key={i}>{token}</span>;
     });
   };
 
   return (
     <div className="markdown-container" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {blocks.map((block, index) => {
+      {blocks.map((block: string, index: number) => {
         // Headings
         if (block.startsWith('# ')) return <h1 key={index} style={{ fontSize: '2.5rem', fontWeight: 700 }}>{parseInline(block.slice(2))}</h1>;
         if (block.startsWith('## ')) return <h2 key={index} style={{ fontSize: '2rem', fontWeight: 600 }}>{parseInline(block.slice(3))}</h2>;
@@ -79,7 +81,6 @@ function MarkdownRenderer({ content }) {
 
         // Code Blocks
         if (block.startsWith('```') && block.endsWith('```')) {
-          // Removes the opening ```language and closing ```
           const codeContent = block.slice(3, -3).replace(/^.*?\n/, ''); 
           return (
             <pre key={index} style={{ 
@@ -94,29 +95,25 @@ function MarkdownRenderer({ content }) {
           );
         }
 
-        // Unordered Lists (matches lines starting with "- " or "* ")
+        // Unordered Lists
         const lines = block.split('\n');
-        if (lines.every(line => line.trim().startsWith('- ') || line.trim().startsWith('* '))) {
+        if (lines.every((line: string) => line.trim().startsWith('- ') || line.trim().startsWith('* '))) {
           return (
             <ul key={index} style={{ paddingLeft: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {lines.map((line, i) => (
+              {lines.map((line: string, i: number) => (
                 <li key={i}>{parseInline(line.trim().slice(2))}</li>
               ))}
             </ul>
           );
         }
 
-        // Default to Paragraph
-        return (
-          <p key={index} style={{ lineHeight: 1.7 }}>
-            {parseInline(block)}
-          </p>
-        );
+        // Paragraph
+        return <p key={index} style={{ lineHeight: 1.7 }}>{parseInline(block)}</p>;
       })}
     </div>
   );
 }
-// --- END CUSTOM PARSER ---
+
 
 
 function ProjectDetail() {
