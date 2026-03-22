@@ -43,8 +43,10 @@ function MarkdownRenderer({ content }: MarkdownRendererProps) {
       }
       const linkMatch = token.match(/\[(.*?)\]\((.*?)\)/);
       if (linkMatch) {
+        const href = linkMatch[2];
+        const isValidScheme = /^(https?:\/\/|\/|#)/.test(href);
         return (
-          <a key={i} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" style={{ 
+          <a key={i} href={isValidScheme ? href : '#'} target="_blank" rel="noopener noreferrer" style={{ 
             color: 'var(--text-primary)', 
             textDecoration: 'underline',
             textUnderlineOffset: '4px'
