@@ -6,7 +6,7 @@ export const Route = createFileRoute('/projects/$projectId')({
   component: ProjectDetail,
 })
 
-import { ReactNode } from 'react' // Import ReactNode for typing children
+import type { ReactNode } from 'react' // Import ReactNode for typing children
 
 // --- CUSTOM MARKDOWN PARSER WITH TYPES ---
 interface MarkdownRendererProps {
