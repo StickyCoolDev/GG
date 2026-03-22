@@ -3,6 +3,13 @@
   margin: 0 auto;
   padding: 0 4rem;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 /* --- Header --- */
