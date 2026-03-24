@@ -19,7 +19,7 @@ function MarkdownRenderer({ content }: MarkdownRendererProps) {
   const blocks: string[] = content.trim().split(/\n\n+/);
 
   const parseInline = (text: string): ReactNode[] => {
-    const tokens = text.split(/(\*\*.*?\*\*|\*.*?\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
+    const tokens = text.split(/(\*\*.*?\*\*|\*.*?\*|`[^`]+`|!\[[^\]]*\]\([^)]+\)|\[[^\]]+\]\([^)]+\))/g);
     
     return tokens.map((token: string, i: number) => {
       if (token.startsWith('**') && token.endsWith('**')) {
@@ -41,6 +41,27 @@ function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </code>
         );
       }
+
+      // Image Support
+      const imageMatch = token.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (imageMatch) {
+        return (
+          <img 
+            key={i} 
+            src={imageMatch[2]} 
+            alt={imageMatch[1]} 
+            style={{ 
+              maxWidth: '100%', 
+              height: 'auto', 
+              borderRadius: '8px',
+              border: '1px solid var(--border-color, #333)',
+              margin: '1rem 0',
+              display: 'block'
+            }} 
+          />
+        );
+      }
+
       const linkMatch = token.match(/\[(.*?)\]\((.*?)\)/);
       if (linkMatch) {
         const href = linkMatch[2];
